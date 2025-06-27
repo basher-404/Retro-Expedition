@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +20,6 @@ public class Trunk_shoots : MonoBehaviour
 
     IEnumerator SpawnObject()
     {
-
         while (true)
         {
          
@@ -35,8 +34,6 @@ public class Trunk_shoots : MonoBehaviour
 
                 bulletspawn();
 
-
-
                 // Set the animator back to the idle state
                 animator.SetBool("is_shooting", false);
 
@@ -47,26 +44,23 @@ public class Trunk_shoots : MonoBehaviour
     
     private void bulletspawn()
     {
-        if (trunk.canShoot)
-        {
-            // Instantiate the object at the position of the spawnPoint
-            GameObject instance = Instantiate(objectPrefab, spawnPoint.position, Quaternion.identity);
-            launcherBlast_soundEffect.Play();
-            Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
+        if (!trunk.canShoot) return;
 
-            // Set gravity scale based on the affectedByGravity variable
-            rb.gravityScale = affectedByGravity ? 1 : 0;
+        // 1) Instantiate
+        GameObject instance = Instantiate(objectPrefab, spawnPoint.position, Quaternion.identity);
+        launcherBlast_soundEffect.Play();
 
-            // Set the velocity of the bullet
-            if (Mathf.Approximately(transform.rotation.eulerAngles.z, 0))
-            {
-                rb.velocity = new Vector2(speed, 0);
-            }
-            else
-            {
-                rb.velocity = new Vector2(25, -speed);
-            }
+        // 2) Auto‐destroy this bullet after 10 seconds
+        Destroy(instance, 10f);
 
-        }
+        // 3) Set up physics
+        Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
+        rb.gravityScale = affectedByGravity ? 1 : 0;
+
+        // 4) Fire it off
+        if (Mathf.Approximately(transform.rotation.eulerAngles.z, 0))
+            rb.velocity = new Vector2(speed, 0);
+        else
+            rb.velocity = new Vector2(25, -speed);
     }
 }
