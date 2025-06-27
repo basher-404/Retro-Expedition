@@ -44,10 +44,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpSoundEffect.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            if (jumpDustParticle != null)
-            {
-                CreateJumpDust();
-            }
+            CreateJumpDust();   
         }
 
         updateAnimationState();
@@ -102,11 +99,8 @@ public class PlayerMovement : MonoBehaviour
 
 
     public void fxPlay()
-    {
-        if(runParticle!=null)
-        {
-            runParticle.Play();
-        }   
+    {      
+       runParticle.Play();  
     }
 
     private void CreateJumpDust()
