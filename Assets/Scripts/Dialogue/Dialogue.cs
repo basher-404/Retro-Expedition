@@ -5,9 +5,15 @@ using TMPro;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 
+public enum DialogueMode
+{
+    NPC,        // Requires talk button press
+    Tutorial    // Starts automatically
+}
+
 public class Dialogue : MonoBehaviour
 {
-    // UI References
+    [Header("UI References")]
     [SerializeField] private GameObject dialogueCanvas;
     [SerializeField] private TMP_Text speakerText;
     [SerializeField] private TMP_Text dialogueText;
@@ -15,23 +21,25 @@ public class Dialogue : MonoBehaviour
     [SerializeField] private Button talk_Button;
     [SerializeField] private Button nextSentenceButton;
 
-    // Animation Targets
+    [Header("Animation Targets")]
     [SerializeField] private RectTransform namePanel;
     [SerializeField] private RectTransform dialoguePanel;
     [SerializeField] private RectTransform avatarTransform;
 
-    // Dialogue Content
+    [Header("Dialogue Content")]
     [SerializeField] private string[] speaker;
     [SerializeField][TextArea] private string[] dialogueWords;
     [SerializeField] private Sprite[] avatar;
 
-    // Animation Settings
+    [Header("Animation Settings")]
     [SerializeField] private float panelAnimationDuration = 0.5f;
     [SerializeField] private float avatarAnimationDuration = 0.7f;
     [SerializeField] private float typewriterSpeed = 0.05f;
 
+    [Header("Configuration")]
+    [SerializeField] private DialogueMode dialogueMode = DialogueMode.NPC;
+
     // Dialogue State
-    private bool canStartDialogue;
     private int currentIndex;
     private bool isTyping;
     private Coroutine typingRoutine;
@@ -40,7 +48,8 @@ public class Dialogue : MonoBehaviour
     private Vector2 dialoguePanelStartPos;
     private Vector2 avatarStartPos;
     private bool isFirstDialogue = true;
-    private bool isAnimating; // Track if UI animations are playing
+    private bool isAnimating;
+    private bool playerInTrigger;
 
     void Start()
     {
@@ -53,7 +62,6 @@ public class Dialogue : MonoBehaviour
         dialoguePanelStartPos = dialoguePanel.anchoredPosition;
         avatarStartPos = avatarTransform.anchoredPosition;
 
-        // Disable next sentence button initially
         nextSentenceButton.interactable = false;
     }
 
@@ -61,25 +69,45 @@ public class Dialogue : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !dialogueCompleted)
         {
-            talk_Button.gameObject.SetActive(true);
+            playerInTrigger = true;
+
+            if (dialogueMode == DialogueMode.NPC)
+            {
+                talk_Button.gameObject.SetActive(true);
+            }
+            else if (dialogueMode == DialogueMode.Tutorial)
+            {
+                StartDialogue();
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        talk_Button.gameObject.SetActive(false);
-        dialogueCanvas.SetActive(false);
-        ResetUIState();
+        if (collision.CompareTag("Player"))
+        {
+            playerInTrigger = false;
+            talk_Button.gameObject.SetActive(false);
+
+            if (dialogueMode == DialogueMode.Tutorial)
+            {
+                // For tutorials, close dialogue when leaving
+                dialogueCanvas.SetActive(false);
+                ResetUIState();
+            }
+        }
     }
 
-    public void button_pressed()
+    public void ButtonPressed()
     {
-        canStartDialogue = true;
-        talk_Button.gameObject.SetActive(false);
-        startDialogue();
+        if (dialogueMode == DialogueMode.NPC && playerInTrigger)
+        {
+            talk_Button.gameObject.SetActive(false);
+            StartDialogue();
+        }
     }
 
-    private void startDialogue()
+    private void StartDialogue()
     {
         if (currentIndex >= speaker.Length)
         {
@@ -103,7 +131,6 @@ public class Dialogue : MonoBehaviour
 
     private IEnumerator AnimateDialogueUI()
     {
-        // Disable next button during animations
         nextSentenceButton.interactable = false;
         isAnimating = true;
 
@@ -113,18 +140,13 @@ public class Dialogue : MonoBehaviour
         dialoguePanel.anchoredPosition = dialoguePanelStartPos - new Vector2(0, 200);
         avatarTransform.anchoredPosition = avatarStartPos - new Vector2(300, 0);
 
-        // Animate panels rising
         yield return StartCoroutine(AnimatePanel(namePanel, namePanelStartPos));
         yield return StartCoroutine(AnimatePanel(dialoguePanel, dialoguePanelStartPos));
-
-        // Animate avatar sliding
         yield return StartCoroutine(AnimateAvatar());
 
-        // Re-enable next button after animations
         nextSentenceButton.interactable = true;
         isAnimating = false;
 
-        // Start text animation
         UpdateDialogueContent();
     }
 
@@ -187,12 +209,10 @@ public class Dialogue : MonoBehaviour
 
     public void OnDialogueTap()
     {
-        // Don't process taps during UI animations
         if (isAnimating) return;
 
         if (isTyping)
         {
-            // Skip text animation
             if (typingRoutine != null) StopCoroutine(typingRoutine);
             dialogueText.text = dialogueWords[currentIndex];
             isTyping = false;
@@ -207,10 +227,16 @@ public class Dialogue : MonoBehaviour
                 dialogueCanvas.SetActive(false);
                 isFirstDialogue = true;
                 currentIndex = 0;
+
+                // For tutorials, disable after completion
+                if (dialogueMode == DialogueMode.Tutorial)
+                {
+                    gameObject.SetActive(false);
+                }
             }
             else
             {
-                startDialogue();
+                StartDialogue();
             }
         }
     }

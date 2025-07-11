@@ -288,6 +288,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialogue Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8084387897627678205, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326409173798921922, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fe7d4a62ab0a64949983ad03c88b43c1, type: 3}
+    - target: {fileID: 8396033177157973527, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -7.5000153
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -108746,5 +108758,5 @@ SceneRoots:
   - {fileID: 7538494632891516190}
   - {fileID: 456026787}
   - {fileID: 792499876}
-  - {fileID: 25817232}
   - {fileID: 1410878066}
+  - {fileID: 25817232}
