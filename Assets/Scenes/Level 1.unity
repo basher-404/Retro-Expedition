@@ -215,6 +215,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1026713627923393191, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1564114723}
+    - target: {fileID: 1026713627923393191, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnDialogueTap
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814470803954442471, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -175
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814470803954442471, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 72.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2174917260363624668, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -295,6 +311,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3172557927395229369, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_text
+      value: etrt
+      objectReference: {fileID: 0}
+    - target: {fileID: 3172557927395229369, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_fontSize
+      value: 27.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953962183273906364, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_text
+      value: tr
+      objectReference: {fileID: 0}
     - target: {fileID: 8084387897627678205, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
       propertyPath: m_Name
       value: Dialogue Canvas
@@ -308,8 +336,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: fe7d4a62ab0a64949983ad03c88b43c1, type: 3}
     - target: {fileID: 8396033177157973527, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -23.500015
+      objectReference: {fileID: 0}
+    - target: {fileID: 8396033177157973527, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -7.5000153
+      value: -8.250008
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4010,6 +4042,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7828150327648511809, guid: 02a850bb6666cdc47b77f9f7b2d1afdd, type: 3}
   m_PrefabInstance: {fileID: 25817232}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1564114723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8785715434813033143, guid: 5bebc19a09511a2478f34e82e5c735df, type: 3}
+  m_PrefabInstance: {fileID: 1410878066}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf56b5d350a89f43a55afb5a823d941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1564273855 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7772047967899292278, guid: 4dcfbd275bcdd98489d990bfa442e78c, type: 3}
