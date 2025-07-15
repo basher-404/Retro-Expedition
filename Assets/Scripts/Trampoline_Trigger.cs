@@ -18,7 +18,6 @@ public class Trampoline_Trigger : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         LaunchObject(collision.gameObject.transform);
-
     }
 
     void LaunchObject(Transform objectTransform)

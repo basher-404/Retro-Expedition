@@ -104,6 +104,5 @@ public class Hidden_Axe : MonoBehaviour
         anim.SetBool("is_attacking", false);
         anim.SetBool("is_retracting", false);
         anim.SetBool("is_idle", false);
-
     }
 }

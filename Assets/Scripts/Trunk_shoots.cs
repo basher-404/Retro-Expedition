@@ -22,7 +22,7 @@ public class Trunk_shoots : MonoBehaviour
     {
         while (true)
         {
-         
+
                 // Set the animator to the shooting state
                 animator.SetBool("is_shooting", true);
 
