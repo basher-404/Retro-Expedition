@@ -43,7 +43,7 @@ public class Dialogue : MonoBehaviour
     private int currentIndex;
     private bool isTyping;
     private Coroutine typingRoutine;
-    private bool dialogueCompleted;
+    public bool dialogueCompleted;
     private Vector2 namePanelStartPos;
     private Vector2 dialoguePanelStartPos;
     private Vector2 avatarStartPos;
