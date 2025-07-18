@@ -9,7 +9,7 @@ public class Hidden_Axe : MonoBehaviour
     public bool is_retracting = false;
     public BoxCollider2D trap_setter;
 
-    [Header("Box Colliders for Axe")]
+    [Header("Box Colliders for Axe while Attacking")]
     public BoxCollider2D frame1;
     public BoxCollider2D frame2;
     public BoxCollider2D frame3;
